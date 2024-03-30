@@ -1,0 +1,470 @@
+{%load static %}
+<!-- Template Main CSS File -->
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.css'%}" rel="stylesheet">
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.min.css'%}" rel="stylesheet">
+  <!--<link href="{%static 'fontawesome-free/css/all.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.css'%}" rel="stylesheet">
+  -->
+  <link href="{%static 'style.css'%}" rel="stylesheet">
+  <link href="{%static 'all.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.min.css'%}" rel="stylesheet">
+
+   <!-- Template Main js File -->
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.js'%}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.min.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.min.js' %}"></script>
+   <script src="{% static 'script.js'%}"></script>
+   <script src="{% static 'jquery.min.js'%}"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="" name="viewport" content="width=device-width, initial-scale=1.0", maximum scale="1"/>
+<meta name="viewport" content="initial-scale=1."/>
+<title>home</title>
+</head>
+<body onload="salesPage(), loginAuthenticate();">  
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Budget Tracking System</a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
+   aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <button type="button" class="btn btn-toggle" id="toggle" aria-controls="sidebarMenu" data-toggle="button" aria-pressed="false" autocomplete="off" aria-expanded="false" aria-label="Toggle" style="margin-left:-25%; background:yellow" onclick="toggleView();"><span class="fa fa-bars">Toggle view</span></button>
+  <form class="d-flex">
+          {%csrf_token%}
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search"
+              aria-label="Search"
+              id="search"
+              name="day_category"
+            />
+            <button class="btn btn-outline-success" type="submit" id="search">
+              Search
+            </button>
+          </form>
+          
+  <div class="navbar-nav">
+    <div class="nav-item text-nowrap">
+      <a class="nav-link px-3" href="{%url 'login'%}">Sign out</a>
+    </div>
+  </div>
+</header>
+
+<div class="container-fluid">
+  <div class="row">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
+      <div class="position-sticky pt-3">
+        <ul class="nav flex-column">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" 
+              aria-hidden="true"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z">
+
+              </path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+              Dashboard
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'expenses'%}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" 
+              aria-hidden="true"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z">
+
+              </path><polyline points="13 2 13 9 20 9"></polyline></svg>
+             Add expenses
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'budget'%}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" 
+              aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path></svg>
+              Add Budget
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'budgetList'%}" id="budget" target="_budget">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" 
+              aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+              Registered Budget
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'ReportPage'%}" id="report">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2" 
+              aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4">
+
+              </line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              Reports
+            </a>
+          </li>
+
+            <li class="nav-item">
+            <a class="nav-link" href="{% url 'expenseList'%}" id="expense" target="_expense">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2" 
+              aria-hidden="true"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4">
+
+              </line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+              Registered expenses
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'home2'%}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+              stroke-linejoin="round" class="feather feather-layers" aria-hidden="true">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17">
+
+              </polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              Expense Page
+            </a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'sales'%}" id="sales">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
+              fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
+              stroke-linejoin="round" class="feather feather-layers" aria-hidden="true">
+              <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon><polyline points="2 17 12 22 22 17">
+
+              </polyline><polyline points="2 12 12 17 22 12"></polyline></svg>
+              Add  Sales
+            </a>
+          </li>
+        </ul>
+
+        <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+          <span>More Pages</span>
+          <a class="link-secondary" href="#" aria-label="Add a new report">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+            viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+            stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"
+             aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16">
+
+             </line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+          </a>
+        </h6>
+        <ul class="nav flex-column mb-2">
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'salesList'%}">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"
+               aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+               <polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line>
+               <line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Registered sales
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
+              viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+              stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" 
+              aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Last quarter
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+               stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" 
+               aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+               <polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line>
+               <line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Social engagement
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
+               stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" 
+               aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+               <polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line>
+               <line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
+              Year-end sale
+            </a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4"><div class="chartjs-size-monitor">
+    <div class="chartjs-size-monitor-expand"><div class=""></div></div>
+    <div class="chartjs-size-monitor-shrink"><div class=""></div></div></div>
+      <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+        <h1 class="h2">Dashboard</h1>
+        <div class="btn-toolbar mb-2 mb-md-0">
+          <span class="welcome"></span>
+          <div class="btn-group me-2">
+            <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+            <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+          </div>
+           
+          <select class="link-me" id="click">
+            <option class="link-me" value="" disabled select hidden>sort</option>
+            <option value="alphabetically"><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="ascending">ascending</a></option>
+            <option value="descenging"><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="descenging">descending</a></option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#b49d80">
+              <div class="inner">
+                <p>monday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 class="monady" id="monday_sales">150</h3>
+                <strong>Total Amount:</strong>
+                <h3 class="monady" id="monday_sales_amount"></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <div class="small-box-footer"><a href="{% url 'sales_moreInfo' 'monday'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a></div>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:bisque">
+              <div class="inner">
+                <p>tuesday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 id="tuesday_sales">53<sup style="font-size: 20px">%</sup></h3>
+                <strong>Total Amount:</strong>
+                <h3 id="tuesday_sales_amount">53</h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-stats-bars"></i>
+              </div>
+              <a href="{% url 'sales_moreInfo' 'tuesday'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:beige">
+              <div class="inner">
+                <p>wednesday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 id="wednesday_sales">44</h3>
+                 <strong>Total Amount:</strong>
+                 <h3 id="wednesday_sales_amount">45</h3>
+                
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+            <a href="{%url 'sales_moreInfo' 'wednesday'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-3 col-6">
+            <!-- small box -->
+            <div class="small-box" style="background-color:aquamarine">
+              <div class="inner">
+                <p>thursday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 id="thursday_sales">65</h3>
+                <strong>Total Amount:</strong>
+                <h3 id="thursday_sales_amount"></h3>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="{% url 'sales_moreInfo' 'thursday'%}" class="small-box-footer text-light">More info<i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+           <div class="wordwrap"><h1 id="wrapper"><b></b></h1></div><br>
+          <div class="col-lg-3 col-6" id="frDay">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#a46d63">
+              <div class="inner">
+                <p>friday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 id="friday_sales">44</h3>
+                <strong>Total Amount:</strong>
+                <h3 id="friday_sales_amount"></h3>
+                
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="{% url 'sales_moreInfo' 'friday'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+         
+          <div class="col-lg-3 col-6" id="satDay">
+            <!-- small box -->
+            <div class="small-box" style="background-color:antiquewhite">
+              <div class="inner">
+                <p>saturday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 id="saturday_sales">44</h3>
+                <strong>Total Amount:</strong>
+                <h3 id="saturday_sales_amount"></h3>
+                
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="{% url 'sales_moreInfo' 'saturday'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6" id="sunDay">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#964f8e">
+              <div class="inner">
+                <p>sunday</p>
+                <strong>Budget Quantity:</strong>
+                <h3 id="sunday_sales">44</h3>
+                 <strong>Total Amount:</strong>
+                <h3 id="sunday_sales_amount"></h3>
+                
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="{% url 'sales_moreInfo' 'sunday'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-6" id="satDay">
+            <!-- small box -->
+            <div class="small-box" style="background-color:#f0c282">
+              <div class="inner">
+                <strong><p>Weekly Budget</p></strong>
+                <h4 id="weekly_sales">44</h4>
+                
+                 <strong>Total Amount:</strong>
+                 <h3 id="weekly_sales_amount"></h3>
+               
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="{%url 'ReportPage'%}" class="small-box-footer text-light">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+        </div>
+      <br>
+        <marquee><h4>This Is a Weekly Sales Trend Graph</h4></marquee>
+      <canvas class="my-4 w-100 chartjs-render-monitor" id="salesTrend" width="603" height="254" 
+      style="display: block; width: 603px; height: 254px;"></canvas>
+   <!--sales section  -->
+      <div class="container-xl" id="table_sales">
+     <div class="table-responsive" id="tb3">
+        <table class="table table-striped table-sm" id="tbl3">
+        <center><div class="section" id="section-2"><h4>Registered Sales</h4></div></center>
+          <thead id="th3">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">date</th>
+              <th scope="col">Day</th>
+              <th scope="col">category</th>
+              <th scope="col">quantity</th>
+              <th scope="col">amount</th>
+              <th scope="col">payment method</th>
+              <th scope="col">description</th>
+              <th scope="col">action</th>
+              <th scope="col">status</th>
+            </tr>
+          </thead> 
+          <tbody>
+            {%for i in sales%}
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.date}}</td>
+              <td id="day_budget">{{i.day}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.quantity}}</td>
+              <td>Tsh: {{i.amount}}</td>
+              <td>{{i.pay_method}}</td>
+              <td>{{i.description}}</td>
+              
+              <td>
+              <a href="{%url 'update_sales' i.id%}" class="btn btn-warning">Update<i class="fa fa-pencil"></i></a>
+              <a href="{%url 'delete_sales' i.id%}" class="btn btn-danger" style="margin-right: 10px">Delete<i class="fa fa-trash-can"></i></a>
+              </td>
+              {%if i.pay_method == 'cash'%}
+              <td class="status" id="status">completed</td>
+              {%elif i.pay_method == 'bank'%}
+              <td class="status" id="status">Transaction commited</td>
+              {%elif i.pay_method == 'pay_number'%}
+              <td class="status" id="status">mobile, success</td>
+              {%elif i.pay_method == 'loan'%}
+              <td class="status" id="status">Debted, pending</td>
+              {%elif i.pay_method == 'aget'%}
+              <td class="status" id="status">completed</td>
+              {%else%}
+              <td class="status" id="status">pending</td>
+              {%endif%}
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+      {%include 'footer.html'%}
+      </div>
+      <!-- end of section-->
+      </div>
+    </main>
+  </div>
+</div>
+<script type="text/javascript">
+ $(document).ready(function () {
+   $(".link-me").on({
+     'click': function (e) {
+       var sort_by = $(this).data("sort-by");
+       var order = $(this).data("order");
+
+       e.preventDefault();
+       $.ajax({
+         type: "GET",
+         url:'/sortBudget',
+         data: { sort_by: sort_by, order: order },
+         csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+         success: function (data) {},
+         error: function (error) {},
+       });
+     },
+     'hover': function (e) {
+       alert("you must select a valid token");
+       $(this).css("cursor", "pointer");
+     },
+   }),
+ });
+</script>
+</body>
+</html>

@@ -1,0 +1,244 @@
+{%load static %}
+<!-- Template Main CSS File -->
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.css'%}" rel="stylesheet">
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.css'%}" rel="stylesheet">
+  <link href="{%static 'style.css'%}" rel="stylesheet" media="print" type="text/css">
+  <link href="{%static 'all.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.min.css'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.css'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.css.map'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.min.css'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.css.map'%}" rel="stylesheet">
+
+   <!-- Template Main js File -->
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.js'%}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.min.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.min.js' %}"></script>
+   <script src="{% static 'script.js'%}"></script>
+   <script src="{% static 'jquery.min.js'%}"></script>
+
+   <!DOCTYPE HTML>
+   <html lang="en">
+    <head>
+        <meta charset="utf-8 strict" />
+        <meta name="viewport" content="width=device API 2.0, initial-scale=1">
+        <title>report</title>
+        <style>
+         .container-fluid {
+          max-width:80%;
+         }
+          .container-fluid button{
+            max-width:30%;
+            padding:20px;
+          }
+        </style>
+    </head>
+    <body onload="report()">
+      {%block content%}
+      <div class="container-fluid">
+        <header class="header bg-gray color-white"><center><h4>weekly Report</center></h4></header>
+        <div class="table-responsive">
+         <header class="header bg-gray-light color-white"><center><h4>All weekly sales</center></h4></header>
+        <table class="table table-bordered table-md" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">item name</th>
+              <th scope="col">date</th>
+              <th scope="col">Day</th>
+              <th scope="col">category</th>
+              <th scope="col">quantity</th>
+              <th scope="col">amount</th>
+              <th scope="col">payment method</th>
+              <th scope="col">description</th>     
+            </tr>
+          </thead>
+          {%for i in sales_report%}
+          <tbody>
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.name}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.day}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.quantity}}</td>
+              <td>Tsh: {{i.amount}}</td>
+              <td>{{i.pay_method}}</td>
+              <td>{{i.description}}</td>              
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+    </div>
+<br>
+    <div class="table-responsive">
+      <header class="header bg-gray-light"><center><h4> All weekly Budgets</center></h4></header>
+        <table class="table table-bordered table-md" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">date</th>
+              <th scope="col">Day</th>
+              <th scope="col">category</th>
+              <th scope="col">quantity</th>
+              <th scope="col">amount</th>
+              <th scope="col">description</th>
+            </tr>
+          </thead>
+          {%for i in budgets_report%}
+          <tbody>
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.day}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.quantity}}</td>
+              <td>Tsh: {{i.amount}}</td>
+              <td>{{i.description}}</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+    </div>
+<br>
+    <div class="table-responsive">
+      <header class="header bg-gray-light color-black"><center><h4>All weekly Expenses</center></h4></header>
+        <table class="table table-bordered table-md" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">date</th>
+              <th scope="col">Day</th>
+              <th scope="col">category</th>
+              <th scope="col">quantity</th>
+              <th scope="col">amount</th>
+              <th scope="col">description</th>
+            </tr>
+          </thead>
+          {%for i in expenses_report%}
+          <tbody>
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.day}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.quantity}}</td>
+              <td>Tsh: {{i.amount}}</td>
+              <td>{{i.description}}</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+    </div>
+    <br>
+    <header class="header"><center><h4 style="text-transform: capitalize">summery Total Amount report per day</center></h4></header>
+    <br>
+    <div class="table-responsive">
+      <header class="header bg-gray-light"><center><h4>Total daily sales</center></h4></header>
+        <table class="table table-bordered table-md" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <th scope="col">monday</th>
+              <th scope="col">tuesday</th>
+              <th scope="col">wednesday</th>
+              <th scope="col">thursday</th>
+              <th scope="col">friday</th>
+              <th scope="col">saturday</th>
+              <th scope="col">sunday</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead> 
+          <tbody>
+            <tr>
+              <td id="monday_sales_summary"></td>
+              <td id="tuesday_sales_summary"></td>
+              <td id="wednesday_sales_summary"></td>
+              <td id="thursday_sales_summary"></td>
+              <td id="friday_sales_summary"></td>
+              <td id="saturday_sales_summary"></td>
+              <td id="sunday_sales_summary"></td>
+              <td id="weekly_sales_summary"></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <br>
+    <div class="table-responsive">
+      <header class="header bg-gray-light"><center><h4>Total daily Budgets</center></h4></header>
+        <table class="table table-bordered table-md" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <th scope="col">monday</th>
+              <th scope="col">tuesday</th>
+              <th scope="col">wednesday</th>
+              <th scope="col">thursday</th>
+              <th scope="col">friday</th>
+              <th scope="col">saturday</th>
+              <th scope="col">sunday</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="monday_budget_summary"></td>
+              <td id="tuesday_budget_summary"></td>
+              <td id="wednesday_budget_summary"></td>
+              <td id="thursday_budget_summary"></td>
+              <td id="friday_budget_summary"></td>
+              <td id="saturday_budget_summary"></td>
+              <td id="sunday_budget_summary"></td>
+              <td id="weekly_budget_summary"></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+
+    <br>
+    <div class="table-responsive">
+      <header class="header bg-gray-light"><center><h4>Total daily Expenses</center></h4></header>
+        <table class="table table-bordered table-md" cellspacing="10px" cellpadding="10px">
+          <thead>
+            <tr>
+              <th scope="col">monday</th>
+              <th scope="col">tuesday</th>
+              <th scope="col">wednesday</th>
+              <th scope="col">thursday</th>
+              <th scope="col">friday</th>
+              <th scope="col">saturday</th>
+              <th scope="col">sunday</th>
+              <th scope="col">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td id="monday_expense_summary"></td>
+              <td id="tuesday_expense_summary"></td>
+              <td id="wednesday_expense_summary"></td>
+              <td id="thursday_expense_summary"></td>
+              <td id="friday_expense_summary"></td>
+              <td id="saturday_expense_summary"></td>
+              <td id="sunday_expense_summary"></td>
+              <td id="weekly_expense_summary"></td>
+            </tr>
+          </tbody>
+        </table>
+    </div>
+    <center><button class="btn btn-block btn-success" id="print" onclick="print()">
+          <i class="fa fa-print"></i>
+          print this Report
+        </button></center>
+  </div>
+  {%include 'footer.html'%}
+  {%endblock%}
+  </body>
+  </html>

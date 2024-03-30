@@ -1,0 +1,133 @@
+{%load static %}
+<!-- Template Main CSS File -->
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.css'%}" rel="stylesheet">
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.min.css'%}" rel="stylesheet">
+  <!--<link href="{%static 'fontawesome-free/css/all.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.css'%}" rel="stylesheet">
+  -->
+  <link href="{%static 'style.css'%}" rel="stylesheet">
+  <link href="{%static 'all.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.min.css'%}" rel="stylesheet">
+
+   <!-- Template Main js File -->
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.js'%}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.min.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.min.js' %}"></script>
+   <script src="{% static 'script.js'%}"></script>
+   <script src="{% static 'jquery.min.js'%}"></script>
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+<title>index</title>
+<style>
+*{
+    padding: 0px;
+    margin: 0px;
+  }
+  body{
+    background-image: url('../media/images/vegetables.jpg');
+    background-repeat:no repeat;
+    background-size: cover;
+    background-position: center;
+
+  }   
+</style>
+</head>
+<body onload="loadImages()">   
+  <div class="container-fluid" id="fluid">
+    <div class="container-l" id="slider">
+      <img src="../media/images/bag.jpg" alt="">
+      <img src="../media/images/air1.jpg" alt="">
+      <img src="../media/images/home decorator copy.png" alt="">
+      <img src="../media/images/apple_pc.jpg" alt="">
+      <img src="../media/images/shoes2.jpg" alt="">
+      <img src="../media/images/camera_shooter.jpg" alt="">
+      <img src="../media/images/bike.jpg" alt="">
+      <img src="../media/images/bag.jpg" alt="">
+    </div>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Budget Tracking System</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav ms-auto mb-2 mb-md-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'register'%}">Register</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'login'%}" tabindex="-1" aria-disabled="true">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<main>
+  <div><marquee><h3>Welcome to budget tracking System
+    add your data for daily tracking</h3></marquee></div>
+  <div class="container marketing bg-secondary" id="marketing">
+    <div class="row">
+      <div class="col-lg-4">
+        <img src="../media/images/AI_watch.jpg" class="bd-placeholder-img rounded-circle" width="140" height="150px" alt="Heading 1" />
+        <h2>item 1</h2>
+        <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p>
+        <p><a class="btn btn-secondary" href="../media/images/AI_watch.jpg">View details »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="../media/images/apple_phone.jpg" class="bd-placeholder-img rounded-circle" width="140" height="150px" alt="Heading 1" />
+
+        <h2>item 2</h2>
+        <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+        <p><a class="btn btn-secondary" href="../media/images/apple_phone.jpg">View details »</a></p>
+      </div><!-- /.col-lg-4 -->
+      <div class="col-lg-4">
+        <img src="../media/images/air1.jpg" class="bd-placeholder-img rounded-circle" width="140" height="150px" alt="Heading 1" />   
+        <h2>item 3</h2>
+        <p>And lastly this, the third column of representative placeholder content.</p>
+        <p><a class="btn btn-secondary" href="../media/images/air1.jpg">View details »</a></p>
+      </div><!-- /.col-lg-4 -->
+    </div><!-- /.row -->
+    <hr class="featurette-divider">
+    {% include 'footer.html' %}
+  </div><!-- /.container -->
+</main>
+<script type="text/javascript">
+    function loadImages() { 
+    
+      $(document).ready(function () {
+        $.ajax({
+          type: "GET",
+          url: "/CarouselSlides",
+          csrfmiddlewaretoken: $('input[name="csrfmiddlewaretoken"]').val(),
+          success: function (data) {
+            console.log(data);
+          },
+          error: function (jqXHR, textStatus, errorThrown) {
+            console.log(textStatus + "   " + errorThrown);
+          },
+        });
+      });
+    };
+</script>
+</div>
+</body> 
+</html>

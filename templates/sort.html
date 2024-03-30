@@ -1,0 +1,114 @@
+{%load static %}
+<!-- Template Main CSS File -->
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.css'%}" rel="stylesheet">
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.css'%}" rel="stylesheet">
+  <link href="{%static 'style.css'%}" rel="stylesheet">
+  <link href="{%static 'all.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.min.css'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.css'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.css.map'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.min.css'%}" rel="stylesheet">
+  <link href="{%static 'admin/css/adminlte.css.map'%}" rel="stylesheet">
+
+   <!-- Template Main js File -->
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.js'%}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.min.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.min.js' %}"></script>
+   <script src="{% static 'script.js'%}"></script>
+   <script src="{% static 'jquery.min.js'%}"></script>
+   <!DOCTYPE htlm>
+<html>
+    <head>
+        <title>sorting</title>
+    </head>
+    <body>
+
+        
+<div class="table-responsive" id="tb1">
+        <table class="table table-striped table-sm" id="tbl1">
+           <center><h4>Registered Budget </h4></center>
+          <thead id="th2">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">date</th>
+              <th scope="col">Day</th>
+              <th scope="col">category</th>
+              <th scope="col">quantity</th>
+              <th scope="col">amount</th>
+              <th scope="col">description</th>
+              <th scope="col">action</th>
+              <th scope="col">status</th>
+            </tr>
+          </thead>
+          {%for i in item%}
+          <tbody>
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.day}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.quantity}}</td>
+              <td>${{i.amount}}</td>
+              <td>{{i.description}}</td>
+              
+              <td>
+              <a href="{%url 'update' i.id%}" class="btn btn-warning">Update<i class="fa fa-pencil"></i></a>
+              <a href="{%url 'delete' i.id%}" class="btn btn-danger" style="margin-right: 10px">Delete<i class="fa fa-trash"></i></a>
+              </td>
+              <td>pending</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+
+       <div class="table-responsive" id="tb2">
+        <table class="table table-striped table-sm" id="tbl2">
+        <center><div class="section" id="section-2"><h4>registered Expenses</h4></div></center>
+          <thead id="th2">
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">date</th>
+              <th scope="col">Day</th>
+              <th scope="col">category</th>
+              <th scope="col">quantity</th>
+              <th scope="col">amount</th>
+              <th scope="col">description</th>
+              <th scope="col">action</th>
+              <th scope="col">status</th>
+            </tr>
+          </thead>
+          {%for i in item%}
+          <tbody>
+            <tr>
+              <td>{{i.id}}</td>
+              <td>{{i.date}}</td>
+              <td>{{i.day}}</td>
+              <td>{{i.category}}</td>
+              <td>{{i.quantity}}</td>
+              <td>${{i.amount}}</td>
+              <td>{{i.description}}</td>
+              
+              <td>
+              <a href="{%url 'update' i.id%}" class="btn btn-warning">Update<i class="fa fa-pencil"></i></a>
+              <a href="{%url 'delete' i.id%}" class="btn btn-danger" style="margin-right: 10px">Delete<i class="fa fa-trash"></i></a>
+              </td>
+              <td>pending</td>
+            </tr>
+          </tbody>
+          {% endfor %}
+        </table>
+      </div>
+        
+    </body>
+    </html>
