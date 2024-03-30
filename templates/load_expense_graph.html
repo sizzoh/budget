@@ -1,0 +1,77 @@
+{%load static %}
+<!-- Template Main CSS File -->
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.css'%}" rel="stylesheet">
+  <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/all.min.css'%}" rel="stylesheet">
+  <!--<link href="{%static 'fontawesome-free/css/all.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.min.css'%}" rel="stylesheet">
+  <link href="{%static 'fontawesome-free/css/fontawesome.css'%}" rel="stylesheet">
+  -->
+  <link href="{%static 'style.css'%}" rel="stylesheet">
+  <link href="{%static 'all.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.css'%}" rel="stylesheet">
+  <link href="{%static 'chart.js/Chart.min.css'%}" rel="stylesheet">
+
+   <!-- Template Main js File -->
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.bundle.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.min.js'%}"></script>
+   <script src="{% static 'bootstrap-5.2.2-dist/js/bootstrap.js'%}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.bundle.min.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.js' %}"></script>
+   <script src="{% static 'chart.js/Chart.min.js' %}"></script>
+   <script src="{% static 'script.js'%}"></script>
+   <script src="{% static 'jquery.min.js'%}"></script>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="" name="viewport" content="width=device-width, initial-scale=1.0", maximum scale="1"/>
+<meta name="viewport" content="initial-scale=1."/>
+<title>home</title>
+<style>
+</style>
+</head>
+<body onload="expense();">
+  <div><div class="header">some animated image</div></div>
+  <br>
+  <br>
+<div class="container-fluid" id="fluid">
+<div class="container" id="slider">
+     <img src="../media/images/bag.jpg" alt="" style="height:600px">
+      <img src="../media/images/air1.jpg" alt="" style="height:600px">
+      <img src="../media/images/home decorator copy.png" alt="" style="height:600px">
+      <img src="../media/images/apple_pc.jpg" alt="" style="height:600px">
+      <img src="../media/images/shoes2.jpg" alt="" style="height:600px">
+      <img src="../media/images/camera_shooter.jpg" alt="" style="height:600px">
+      <img src="../media/images/bike.jpg" alt="" style="height:600px">
+      <img src="../media/images/AI_watch.jpg" alt="" style="height:600px">
+      <img src="../media/images/bag.jpg" alt="" style="height:600px">
+  <script>
+ $(document).ready(function () {
+   $(".link-me").on({
+     'click': function (e) {
+       var sort_by = $(this).data("sort-by");
+       var order = $(this).data("order");
+
+       e.preventDefault();
+       $.ajax({
+         type: "GET",
+         url:'/sortBudget',
+         data: { sort_by: sort_by, order: order },
+         csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+         success: function (data) {},
+         error: function (error) {},
+       });
+     },
+     'hover': function (e) {
+       alert("you must select a valid token");
+       $(this).css("cursor", "pointer");
+     },
+   }),
+ });
+</script>
+</div>
+</div>
+</body>
+</html>

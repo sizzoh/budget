@@ -1,0 +1,116 @@
+.wordwrap{
+    position: relative;
+    align-content: center;
+    text-align: center;
+    
+}
+
+#wrapper{
+    animation: list 2s ease-in; 
+    animation-delay: 5s;
+    animation-duration: inherit !important;
+    animation-iteration-count: infinite;
+    
+}
+@keyframes list {
+  10%{
+    background-color: aqua;
+  } 
+  40%{
+    background-color: blueviolet;
+  } 
+  60%{
+    background-color: gray;
+  }
+  100%{
+    background-color: blue;
+  }
+}
+
+#frDay,#satDay,#sunDay {
+  margin-bottom: 10px;
+}
+
+/*#cards:hover{
+transition: 2s;
+transform: scale(1.1);
+z-index: 2;
+}
+*/
+@media print{
+  button{
+display: none;
+}
+} 
+
+
+
+#mySlideController{
+  background-image: url('../media/images/AI_watch.jpg');
+  background-color: gray;
+}
+
+.table tbody tr td:hover{
+background-color: white;
+}
+
+.welcome{
+  padding: 10px;
+  margin-left: -20%;
+  color: black;
+}
+
+#fluid{
+  width:auto;
+  overflow: hidden;
+  height: fit-content;
+  display: flex;
+
+}
+#slider{
+  display: flex;
+  height: 50%;
+  animation-name: background-image;
+  animation-duration: 30s;
+  animation-timing-function: ease-in;
+  animation-delay: 3s;
+  animation-iteration-count: infinite;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  
+}
+@keyframes background-image{
+10%{
+  transform: translateX(0%);
+}
+30%{
+  transform: translateX(-100%);
+}
+50%{
+  transform: translateX(-200%);
+}
+70%{
+  transform: translateX(-300%);
+}
+90%{
+  transform: translateX(-400%);
+}
+100%{
+  transform: translateX(-500%);
+}
+0%{
+  transform: translateX(0%);
+}
+
+}
+
+#slider img{
+  width: fit-content;
+  height: 200px;
+
+}
+
+.container-fluid > .row a{
+  text-decoration: none;
+}
