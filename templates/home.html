@@ -29,27 +29,24 @@
 <meta charset="" name="viewport" content="width=device-width, initial-scale=1.0", maximum scale="1"/>
 <meta name="viewport" content="initial-scale=1."/>
 <title>home</title>
-<style>
-</style>
 </head>
-<body>
 <body onload="charts(), loginAuthenticate();">  
-<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Budget Tracking System</a>
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Logo</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <form class="justify-content-center">
+  <form class="form d-flex">
           {%csrf_token%}
             <input
-              class="form-control me-2"
+              class="form-control mr-auto float-end m-1"
               type="search"
-              placeholder="Search"
+              placeholder="Search here..."
               aria-label="Search"
               id="search"
               name="day_category"
             />
-            <button class="btn btn-outline-success" type="submit" id="search">
+            <button class="btn btn-secondary p-2" type="submit" id="search">
               Search
             </button>
           </form>   
@@ -227,7 +224,6 @@
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
-           
           <select class="link-me" id="click">
             <option class="link-me" value="" disabled select hidden>sort</option>
             <option value="alphabetically"><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="ascending">ascending</a></option>

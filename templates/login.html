@@ -32,19 +32,20 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> Login</title>
+  <title>Budget Tracking System</title>
   <!-- Google Font: Source Sans Pro -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 </head>
 <body class="hold-transition login-page" onload="login();">
   <!-- /.login-logo -->
+  <div class="login-box">
   <div class="card">
     <div class="card-body login-card-body">
-      <p class="login-box-msg text-capitalize">budget stracking system</p>
+      <p class="login-box-msg text-capitalize"><b>budget tracking system</b></p>
       <p class="login-box-msg">Sign in to start your session</p>
      {% for message in messages%}
         <div class="alert alert-{{message.tags}}">{{message}}
-          <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
+        <button class="close" data-dismiss="alert" aria-label="close">&times;</button>
         </div>
             {% endfor %}
       <form action="login" method="post">
@@ -79,15 +80,15 @@
           <!-- /.col -->
         </div>
       </form>
-
-      <div class="social-auth-links text-center mb-3">
+<center>
+      <div class="social-auth-links text-center">
         <p>- OR -</p>
-        <a href="#" class="btn btn-block btn-primary">
+        <center><a href="#" class="btn btn-block btn-primary w-75">
           <i class="fab fa-google mr-2"></i> Sign in using Google
         </a>
-        <a href="#" class="btn btn-block btn-warning">
+        <a href="#" class="btn btn-block btn-warning w-75">
           <i class="fab fa-microsoft-bars mr-2"></i> Sign in using Microsoft
-        </a>
+        </a></center>
       </div>
       <!-- /.social-auth-links -->
 
@@ -97,6 +98,7 @@
       <p class="mb-0">
         <a href="{%url 'register'%}" class="text-center">Register a new membership</a>
       </p>
+      </center>
     </div>
   </div>
   <script>
@@ -125,6 +127,7 @@ $(document).ready(function () {
   });
 });
   </script>
+</div>
 </div>
 </body>
 </html>
