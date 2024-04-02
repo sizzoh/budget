@@ -416,13 +416,7 @@ function charts() {
                         barThickness: 50,
                       },
                     ],
-                    options: {
-                      scales: {
-                        x: {
-                          barPercentage: 0.75,
-                        },
-                      },
-                    },
+                    options: {},
                   },
                 });
               }//ajax charts ends here 
@@ -527,8 +521,6 @@ $(document).ready(function () {
         
       })
 });    
-    
-
  //execute count function 
 document.addEventListener('DOMContentLoaded', function () { 
     
@@ -765,7 +757,7 @@ function salesPage() {
                   thursday_sales,
                   friday_sales,
                   saturday_sales,
-                  sunday_sales
+                  sunday_sales,
                 ],
                 backgroundColor: [
                   "teal",
@@ -776,6 +768,7 @@ function salesPage() {
                   "#3c8dbc",
                   "#d2d6de",
                 ],
+                barThickness: 50,
               },
             ],
             options: {},
@@ -799,6 +792,20 @@ function hideButton() {
   })
 }
 
+function toggleNavBar() {
+  $(function () {
+    var nav = $("#sidebarMenu");
+    nav.hide();
+    var buttonToggle = $("<button class='navbar-toggler position-absolute d-md-none collapsed' type='button' data-bs-toggle='collapse' id='toggleButton' data-bs-target='#sidebarMenu' aria-controls='sidebarMenu' aria-expanded='false' aria-label='Toggle navigation'>");
+    var logo = $("#logo");
+    logo
+      .append(buttonToggle)
+      .append("<span class='navbar-toggler-icon'></span>");
+    buttonToggle.on("click", function () {
+      nav.hide();
+    });
+  });
+}
 
 function expense() {
   const expenseChart = document.getElementById('expenseChart').getContext('2d');
