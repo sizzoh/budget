@@ -32,16 +32,16 @@
 </head>
 <body onload="salesPage(), loginAuthenticate();">  
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#"></a>
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Logo</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu"
    aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
-  <button type="button" class="btn btn-toggle" id="toggle" aria-controls="sidebarMenu" data-toggle="button" aria-pressed="false" autocomplete="off" aria-expanded="false" aria-label="Toggle" style="margin-left:-25%; background:yellow" onclick="toggleView();"><span class="fa fa-bars">Toggle view</span></button>
-  <form class="justify-content-center">
+  {% comment %} <button type="button" class="btn btn-toggle" id="toggle" aria-controls="sidebarMenu" data-toggle="button" aria-pressed="false" autocomplete="off" aria-expanded="false" aria-label="Toggle" style="margin-left:-25%; background:yellow" onclick="toggleView();"><span class="fa fa-bars">Toggle view</span></button> {% endcomment %}
+  <form class="form d-flex">
           {%csrf_token%}
             <input
-              class="form-control me-2"
+              class="form-control mr-auto"
               type="search"
               placeholder="Search"
               aria-label="Search"
