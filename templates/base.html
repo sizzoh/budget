@@ -1,10 +1,5 @@
-{%load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="" name="viewport" content="width=device-width, initial-scale=1.0", maximum scale="1"/>
-<title>home</title>
-    <!-- Template Main CSS File -->
+{%load static %}
+<!-- Template Main CSS File -->
   <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.css'%}" rel="stylesheet">
   <link href="{%static 'bootstrap-5.2.2-dist/css/bootstrap.min.css'%}" rel="stylesheet">
   <link href="{%static 'fontawesome-free/css/all.min.css'%}" rel="stylesheet">
@@ -28,30 +23,47 @@
    <script src="{% static 'chart.js/Chart.min.js' %}"></script>
    <script src="{% static 'script.js'%}"></script>
    <script src="{% static 'jquery.min.js'%}"></script>
-<style>
-</style>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="" name="viewport" content="width=device-width, initial-scale=1.0", maximum scale="1"/>
+<meta name="viewport" content="initial-scale=1."/>
+<title>home</title>
 </head>
-<body onload="salesPage(), charts(), expense()">  
-<header class="navbar navbar-dark sticky-top flex-sm-nowrap p-0 shadow" style="background-color:#47484a">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Budget Tracking System</a>
+<body onload="charts(), loginAuthenticate();">  
+<header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Logo</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
-  </button> 
+  </button>
+  <form class="form d-flex">
+          {%csrf_token%}
+            <input
+              class="form-control mr-auto float-end m-1"
+              type="search"
+              placeholder="Search here..."
+              aria-label="Search"
+              id="search"
+              name="day_category"
+            />
+            <button class="btn btn-secondary p-2" type="submit" id="search">
+              Search
+            </button>
+          </form>   
   <div class="navbar-nav">
     <div class="nav-item text-nowrap">
-      <a class="nav-link px-3" href="{%url 'logout'%}">
-        <p id="user"></p><p id="loginUser"></p>Sign out</a>
+      <a class="nav-link px-3" href="{%url 'login'%}">Sign out</a>
     </div>
   </div>
 </header>
 
 <div class="container-fluid">
   <div class="row">
-    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse" style="background-color:#122b3e">
+    <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-dark sidebar collapse">
       <div class="position-sticky pt-3">
         <ul class="nav flex-column">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{%url 'home'%}">
+            <a class="nav-link active" aria-current="page" href="#">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-home" 
@@ -62,7 +74,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'expenses'%}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-file" 
@@ -73,7 +85,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{%url 'budget'%}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-shopping-cart" 
@@ -83,7 +95,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" id="budget" target="_budget">
+            <a class="nav-link" href="{%url 'budgetList'%}" id="budget" target="_budget">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-users" 
@@ -94,7 +106,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" id="report">
+            <a class="nav-link" href="{% url 'ReportPage'%}" id="report">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2" 
@@ -106,7 +118,7 @@
           </li>
 
             <li class="nav-item">
-            <a class="nav-link" href="#" id="expense" target="_expense">
+            <a class="nav-link" href="{% url 'expenseList'%}" id="expense" target="_expense">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-bar-chart-2" 
@@ -118,7 +130,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{% url 'home2'%}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
               stroke-linejoin="round" class="feather feather-layers" aria-hidden="true">
@@ -130,7 +142,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#" id="sales">
+            <a class="nav-link" href="{% url 'sales'%}" id="sales">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" 
               fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" 
               stroke-linejoin="round" class="feather feather-layers" aria-hidden="true">
@@ -149,13 +161,12 @@
             viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
             stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"
              aria-hidden="true"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16">
-
              </line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           </a>
         </h6>
         <ul class="nav flex-column mb-2">
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{%url 'salesList'%}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"
@@ -166,7 +177,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{%url 'salesPage'%}">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" 
               viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" 
               stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text" 
@@ -208,20 +219,22 @@
       <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
         <h1 class="h2">Dashboard</h1>
         <div class="btn-toolbar mb-2 mb-md-0">
+          <span class="welcome"></span>
           <div class="btn-group me-2">
             <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
             <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
           </div>
-           
           <select class="link-me" id="click">
-            <option class="link-me">sort</option>
-            <option><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="ascending">ascending</a></option>
-            <option><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="descenging">descending</a></option>
+            <option class="link-me" value="" disabled select hidden>sort</option>
+            <option value="alphabetically"><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="ascending">ascending</a></option>
+            <option value="descenging"><a href="#" class="link-me" data-sort-by="alphabetically" data-oder="descenging">descending</a></option>
           </select>
         </div>
       </div>
-  {%block content%}
-  {%endblock%}
+      </div>
+      {%block content%}
+      {% endblock%}
+      {%include 'footer.html'%}
     </main>
   </div>
 </div>

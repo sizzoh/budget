@@ -30,10 +30,10 @@
 <meta name="viewport" content="initial-scale=1."/>
 <title>home</title>
 </head>
-<body onload="charts(), loginAuthenticate();">  
+<body onload="charts(), loginAuthenticate(), toggleNavBar();">  
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-3 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" href="#">Logo</a>
-  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+  <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" id="logo" href="#"></a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-bs-toggle="collapse" id="toggleButton" data-bs-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <form class="form d-flex">
@@ -232,7 +232,7 @@
         </div>
       </div>
       <div class="row">
-          <div class="col-lg-3 col-6" id="card">
+          <div class="col-lg-3 col-6 mb-4" id="card">
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
@@ -249,7 +249,7 @@
             </div>
           </div>
           <!-- ./col -->
-          <div class="col-lg-3 col-6">
+          <div class="col-lg-3 col-6 mb-4">
             <!-- small box -->
             <div class="small-box bg-success">
               <div class="inner">
@@ -374,6 +374,8 @@
           </div>
         </div>
       <br>
+      <br>
+      <br>
         <marquee><h4>This Is a Weekly Budget Trend Graph</h4></marquee>
       <canvas class="my-4 w-100 chartjs-render-monitor" id="myChart" width="603" height="254" 
       style="display: block; width: 603px; height: 254px;"></canvas>
@@ -413,6 +415,8 @@
           {% endfor %}
         </table>
       </div>
+      <br>
+      <br>
   {%include 'footer.html'%}
       <!-- end of section-->
       </div>
