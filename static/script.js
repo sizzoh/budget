@@ -413,9 +413,16 @@ function charts() {
                           "#3c8dbc",
                           "#d2d6de",
                         ],
+                        barThickness: 50,
                       },
                     ],
-                    Options: {},
+                    options: {
+                      scales: {
+                        x: {
+                          barPercentage: 0.75,
+                        },
+                      },
+                    },
                   },
                 });
               }//ajax charts ends here 

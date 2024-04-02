@@ -16,7 +16,7 @@ from .forms import customForm
 
 
 def index(request):
-    return render(request, 'index.html')
+    return render(request, 'login.html')
 
 
 @login_required(login_url='login')
@@ -59,21 +59,20 @@ def login(request):
     if request.method=='POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        if username== "" or password==" ":
+        user = auth.authenticate(username=username, password=password)
+        if username== "" or password== "":
             messages.info(request, 'Please enter a username and password to login')
             return redirect('login')
             
-        else:
-            if len(password) < 8:
+        elif len(password) < 8:
                 messages.info(request, 'password must contain at least 8 characters')
                 return redirect('login') 
-            else:
-                user = auth.authenticate(username=username, password=password)
-                if user is not None:
-                    auth.login(request, user)
-                    return redirect('home')
-                else:
-                    messages.info(request, 'invalid credentials')
+            
+        elif user is not None:
+            auth.login(request, user)
+            return redirect('home')
+        else:
+            messages.info(request, 'invalid credentials')
                        
         '''       
         user = auth.authenticate(username=username, password=password)
@@ -96,15 +95,11 @@ def recover(request):
     if request.method=='POST':
         username_new = request.POST.get('username')
         password_new = request.POST.get('password')
-        user = User.objects.filter(username=username_new)
-        for i in user:
-         if i.username==username_new:
-            i.username = username_new
-            i.password= password_new
-            i.save()
+        user = User.objects.filter(username=username_new).update(username=username_new, password=password_new)
+        
+        if user:
             messages.info(request, "User password changed successfully")
-            break
-        else:
+        else:    
             messages.info(request, 'username not found')    
                 
     return render(request, 'recover.html')
